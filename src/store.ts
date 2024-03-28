@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
 type WordsStore = {
   words: string[];
@@ -7,3 +7,14 @@ type WordsStore = {
 export const useWordsStore = create<WordsStore>(() => ({
   words: ['stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious']
 }));
+
+type KeyboardStore = {
+  layout: string;
+  changeLayout: (newLayout: string) => void;
+}
+
+export const useKeyboardStore = create<KeyboardStore>((set) => ({
+  layout: 'qwerty',
+  changeLayout: (newLayout: string) => set({ layout: newLayout }),
+}));
+

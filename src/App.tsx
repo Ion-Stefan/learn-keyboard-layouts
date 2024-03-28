@@ -1,3 +1,4 @@
+import { LayoutSelector } from "./components/LayoutSelector"
 import { NavBar } from "./components/NavBar"
 import { TextBox } from "./components/TextBox"
 
@@ -6,8 +7,9 @@ function App() {
 
   return (
     <>
-      <NavBar/>
-      <TextBox/>
+      <NavBar />
+      <LayoutSelector />
+      <TextBox />
     </>
   )
 }
