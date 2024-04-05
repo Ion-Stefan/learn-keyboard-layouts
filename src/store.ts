@@ -5,7 +5,7 @@ type WordsStore = {
 }
 
 export const useWordsStore = create<WordsStore>(() => ({
-  words: ['stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious']
+  words: ['stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious', 'stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious', 'stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious', 'stefan', 'altceva', 'cuvinte', 'random', 'test', 'hello', 'supercalifrigilisticexpialidocious']
 }));
 
 type KeyboardStore = {
@@ -14,7 +14,7 @@ type KeyboardStore = {
 }
 
 export const useKeyboardStore = create<KeyboardStore>((set) => ({
-  layout: 'qwerty',
+  layout: 'dvorak',
   changeLayout: (newLayout: string) => set({ layout: newLayout }),
 }));
 

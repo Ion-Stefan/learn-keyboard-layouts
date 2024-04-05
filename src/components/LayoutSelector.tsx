@@ -5,10 +5,10 @@ export const LayoutSelector = () => {
   const changeKeyboardLayout = useKeyboardStore((state) => state.changeLayout);
 
   return (
-    <div>
+    <div className="flex p-12 items-center justify-center m-auto w-[30vw]">
       <select onChange={(e) => changeKeyboardLayout(String(e.target.value))}>
-        <option value='qwerty'>QWERTY</option>
         <option value='dvorak'>DVORAK</option>
+        <option value='qwerty'>QWERTY</option>
         {/* <option value='colemak'>COLEMAK</option> */}
       </select>
     </div>

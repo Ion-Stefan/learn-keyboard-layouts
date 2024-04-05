@@ -83,9 +83,8 @@ export const TextBox = () => {
 
   return (
     <div className="flex items-center justify-center flex-col gap-12">
-      <WordList words={typeWords} />
+      <WordList words={typeWords.slice(0,9)} />
       <input onKeyDown={(e: React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>) => ChangeKey(e, keyboardLayout)} onChange={(e) => CheckWord(e)} className="border-black border-2 w-1/4 p-2" />
-      <button className="border-red-500 border-4 p-5 bg-teal-200" onClick={() => console.log(keyboardLayout)}>what layout am I using?</button>
     </div>
   )
 }
