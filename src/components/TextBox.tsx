@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useKeyboardStore, useWordsStore } from "../store"
 import { WordList } from "./WordList";
+import { LevelSelector } from "./LevelSelector";
 
 type KeyPair = {
   [key: string]: string;
@@ -9,8 +10,23 @@ type KeyPair = {
 export const TextBox = () => {
 
   const typeWords = useWordsStore((state) => state.words);
+  const [currentWords, setCurrentWords] = useState(typeWords[0]);
   const keyboardLayout = useKeyboardStore((state) => state.layout);
+  const [listIndex, setListIndex] = useState(1);
   const [typedWord, setTypedWord] = useState('');
+
+  const nextWordList = () => {
+    setCurrentWords(typeWords[listIndex + 1])
+    setListIndex(listIndex + 1)
+  }
+
+  const prevWordList = () => {
+    if (listIndex !== 0) {
+      setCurrentWords(typeWords[listIndex - 1])
+      setListIndex(listIndex - 1)
+    }
+  }
+
 
   const DvorakKeyPairs: KeyPair = {
     a: "a",
@@ -73,17 +89,29 @@ export const TextBox = () => {
     }
   }
 
+  const CheckListLength = (wordIndex: number) => {
+    console.log(currentWords.length)
+    if (currentWords.length === 0) {
+      console.log('should change')
+      setCurrentWords(typeWords[wordIndex]);
+      setListIndex(listIndex + 1);
+    }
+  }
+
   const CheckWord = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (typedWord === typeWords[0]) {
-      typeWords.shift();
+    if (typedWord === currentWords[0]) {
+      currentWords.shift();
+      setCurrentWords(currentWords);
       setTypedWord('');
       event.target.value = '';
+      CheckListLength(listIndex);
     }
   }
 
   return (
     <div className="flex items-center justify-center flex-col gap-12">
-      <WordList words={typeWords.slice(0,9)} />
+      <LevelSelector nextWordList={nextWordList} prevWordList={prevWordList} />
+      <WordList words={currentWords.slice(0, 9)} />
       <input onKeyDown={(e: React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLInputElement>) => ChangeKey(e, keyboardLayout)} onChange={(e) => CheckWord(e)} className="border-black border-2 w-1/4 p-2" />
     </div>
   )
