@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useKeyboardLayoutStore, useListIndexStore } from "../store";
 
 export const Keyboard = () => {
@@ -13,7 +13,7 @@ export const Keyboard = () => {
   ];
   const levelIndex = useListIndexStore((state) => state.index);
   console.log(levelIndex);
-  const DvorakKeyPairs: KeyPair = {
+  const DvorakKeyPairs = {
     a: "a",
     s: "o",
     d: "e",

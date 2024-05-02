@@ -99,6 +99,7 @@ export const TextBox = () => {
     if (currentWords.length === 0) {
       console.log('should change')
       setCurrentWords(typeWords[wordIndex + 1]);
+      updateIndex(listIndex+1)
     }
   }
 
