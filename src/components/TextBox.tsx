@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useKeyboardStore, useWordsStore } from "../store"
+import { useKeyboardStore, useListIndexStore, useWordsStore } from "../store"
 import { WordList } from "./WordList";
 import { LevelSelector } from "./LevelSelector";
 
@@ -10,20 +10,25 @@ type KeyPair = {
 export const TextBox = () => {
 
   const typeWords = useWordsStore((state) => state.words);
+  const updateIndex = useListIndexStore((state) => state.updateIndex);
   const [currentWords, setCurrentWords] = useState(typeWords[0]);
   const keyboardLayout = useKeyboardStore((state) => state.layout);
-  const [listIndex, setListIndex] = useState(1);
+  const [listIndex, setListIndex] = useState(0);
   const [typedWord, setTypedWord] = useState('');
 
   const nextWordList = () => {
-    setCurrentWords(typeWords[listIndex + 1])
-    setListIndex(listIndex + 1)
+    if (listIndex !== typeWords.length - 1) {
+      setCurrentWords(typeWords[listIndex + 1])
+      setListIndex(listIndex + 1)
+      updateIndex(listIndex+1)
+    }
   }
 
   const prevWordList = () => {
     if (listIndex !== 0) {
       setCurrentWords(typeWords[listIndex - 1])
       setListIndex(listIndex - 1)
+      updateIndex(listIndex-1)
     }
   }
 
@@ -93,8 +98,7 @@ export const TextBox = () => {
     console.log(currentWords.length)
     if (currentWords.length === 0) {
       console.log('should change')
-      setCurrentWords(typeWords[wordIndex]);
-      setListIndex(listIndex + 1);
+      setCurrentWords(typeWords[wordIndex + 1]);
     }
   }
 

@@ -539,3 +539,13 @@ export const useKeyboardLayoutStore = create<KeyboardLayout>(() => ({
     [";", "q", "j", "k", "x", "b", "m", "w", "v", "z"],
   ],
 }));
+
+type ListIndex = {
+  index: number;
+  updateIndex: (newIndex: number) => void;
+}
+
+export const useListIndexStore = create<ListIndex>((set) => ({
+  index: 0,
+  updateIndex: (newIndex: number) => set({ index: newIndex }),
+}));
